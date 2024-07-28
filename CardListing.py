@@ -1,23 +1,19 @@
 import sys
 import random
 from PySide6 import QtCore, QtWidgets, QtGui
+from CardManager import CardManager
 
 class CardListing(QtWidgets.QWidget):
     def __init__(self):
         super().__init__()
+        self.manager = CardManager()
 
-        self.hello = ["Hallo Welt", "Hei maailma", "Hola Mundo", "Привет мир"]
+    def newProject(self):
+        self.manager.createFile("cards.json")
+        
+    def openProject(self):
+        self.manager.importFile()
 
-        self.button = QtWidgets.QPushButton("Click me!")
-        self.text = QtWidgets.QLabel("Hello World",
-                                     alignment=QtCore.Qt.AlignCenter)
-
-        self.layout = QtWidgets.QVBoxLayout(self)
-        self.layout.addWidget(self.text)
-        self.layout.addWidget(self.button)
-
-        self.button.clicked.connect(self.magic)
-
-    @QtCore.Slot()
+'''    @QtCore.Slot()
     def magic(self):
-        self.text.setText(random.choice(self.hello))
+        self.text.setText(random.choice(self.hello))'''
