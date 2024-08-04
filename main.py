@@ -16,7 +16,7 @@ class MainWindow(QMainWindow):
         self.start()
         
     def start(self):
-        self.widget = CardListing()
+        self.widget = VisualBook()
         self.setCentralWidget(self.widget)
         self.resize(800, 600)
         menubar = self.menuBar()
@@ -36,15 +36,13 @@ class MainWindow(QMainWindow):
         file_menu.addAction(save_action)
         
     def new_file(self):
-        print("New file action triggered")
-        self.widget.newProject()
+        self.widget.newBook()
 
     def open_file(self):
-        print("Open file action triggered")
-        self.widget.openProject()
+        self.widget.openBook()
 
     def save_file(self):
-        print("Save file action triggered")
+        self.widget.saveBook()
     
 if __name__ == "__main__":
     app = QApplication([])
