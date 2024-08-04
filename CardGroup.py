@@ -1,7 +1,8 @@
 from Kanjicard import Kanjicard
 
 class CardGroup:
-    def __init__(self):
+    def __init__(self, title: str):
+        self.title = title
         self.cards: list[Kanjicard] = []
         
     def add(self, card: Kanjicard):
@@ -9,6 +10,12 @@ class CardGroup:
         
     def remove(self, card: Kanjicard):
         self.cards.remove(card)
+        
+    def getAll(self):
+        return self.cards
+        
+    def getTitle(self):
+        return self.title()
         
     def __str__(self):
         res = ""
