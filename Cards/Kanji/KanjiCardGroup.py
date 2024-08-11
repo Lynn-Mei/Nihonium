@@ -15,7 +15,10 @@ class KanjiCardGroup:
         return self.cards
         
     def getTitle(self):
-        return self.title()
+        return self.title
+        
+    def setTitle(self, title):
+        self.title = title
         
     def __str__(self):
         res = ""
