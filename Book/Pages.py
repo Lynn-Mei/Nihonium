@@ -1,3 +1,5 @@
+''' Need to add the import of XmlLoader '''
+
 class Pages:
     def __init__(self, lines:list):
         self.KanjiListing = []
@@ -5,9 +7,10 @@ class Pages:
         '''Les KanjiCardGroup seront gardes ici, il faudra eventuellement optimiser pour eviter d'en garder trop '''
         self.kanjigroups = []
         self.vocgroups = []
-        for i in range(1, len(lines)):
-            '''Coder l'append des lignes aux listes en fonction de leur type (parsing)'''
-        self.t = ""
+        parser = XmlLoader(lines)
+        tempCollection = parser.parseMain()
+        self.KanjiListing = tempCollection[0]
+        self.VocListing = tempCollection[1]
         
     def openKanjiGroup(index: int)->KanjiCardGroup:
         group: KanjiCardGroup = None
