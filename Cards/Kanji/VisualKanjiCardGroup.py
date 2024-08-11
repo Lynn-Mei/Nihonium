@@ -3,7 +3,7 @@ from VisualKanjiCard import VisualKanjiCard
 from PySide6 import QtCore, QtWidgets, QtGui
 
 class VisualKanjiCardGroup(QtWidgets.QWidget):
-    def __init__(self, listing: CardGroup):
+    def __init__(self, listing: KanjiCardGroup):
         super().__init__()
         self.listing = listing
         self.visualListing = []
