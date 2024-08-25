@@ -1,4 +1,7 @@
 import xml.etree.ElementTree as ET
+from Cards.Kanji.KanjiCardGroup import KanjiCardGroup
+from Cards.Kanji.Kanjicard import Kanjicard
+
 
 class XmlLoader:
     def __init__(self, lines: list, path: str):
@@ -29,17 +32,17 @@ class XmlLoader:
         self.lines = lines
     
     def parseKanjiGroup(self):
-        """group = KanjiCardGroup("Untitled")"""
+        group = KanjiCardGroup("Untitled")
         tree = ET.parse(self.path)
         root = tree.getroot()
         for child in root:
             element_tag = child.tag.split('}')[-1]
             if element_tag == "Title":
-                """group.setTitle(child.text)"""
-                print(f"Title: {child.text}")
+                group.setTitle(child.text)
             elif element_tag == "Cards":
                 for card in list(child):
                     kanji = card.find('Kanji').text
                     readings = [reading.text for reading in card.findall('Reading')]
-                    meaning = card.find('Meaning').text
-                    print(f"Kanji: {kanji}, Readings: {readings}, Meaning: {meaning}")
+                    meaning = [meaning.text for meaning in card.findall('Meaning')]
+                    group.add(Kanjicard(kanji, readings, meaning))
+        return group
