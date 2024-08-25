@@ -7,7 +7,7 @@ class Pages:
         '''Les KanjiCardGroup seront gardes ici, il faudra eventuellement optimiser pour eviter d'en garder trop '''
         self.kanjigroups = {}
         self.vocgroups = {}
-        parser = XmlLoader(lines)
+        parser = XmlLoader(lines, "")
         tempCollection = parser.parseMain()
         self.KanjiListing = tempCollection[0]
         self.VocListing = tempCollection[1]
@@ -18,8 +18,8 @@ class Pages:
         if file in self.kanjigroups.keys():
             group = self.kanjigroups[file]
         else:
-            fileLines = self.getGroupFile(file)
-            parser = XmlLoader(fileLines)
+            filePath = self.getPathFile(file)
+            parser = XmlLoader([], filePath)
             group = parser.parseKanjiGroup()
         self.kanjigroups[file] = group
         return group
@@ -28,14 +28,10 @@ class Pages:
         return VocCardGroup()'''
         
     ''' ToDO : Definir le chemin Nihonium en constante '''
-    def getGroupFile(self, file:str) -> list:
+    def getPathFile(self, file:str) -> list:
         path = os.path.join(os.environ['APPDATA'], "Nihonium")
         path = os.path.join(path, file)
-        lines = []
-        with open(path, "r") as f:
-            for line in f:
-                lines.append(line.strip())
-        return lines
+        return path
     
     def toXml()->str:
         return ["to", "code"]

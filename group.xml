@@ -1,26 +1,28 @@
-<Title>Kanji for number</Title>
-<Count>4</Count>
-<Cards>
-	<Card>
-		<Kanji>一</Kanji>
-		<Reading>いつ</Reading>
-		<Reading>いち</Reading>
-		<Meaning>One</Meaning>
-	</Card>
-	<Card>
-		<Kanji>二</Kanji>
-		<Reading>に</Reading>
-		<Reading>ふた/Reading>
-		<Meaning>Two</Meaning>
-	</Card>
-	<Card>
-		<Kanji>三</Kanji>
-		<Reading>さん</Reading><Reading>みつ</Reading>
-		<Meaning>Three</Meaning>
-	</Card>
-	<Card>
-		<Kanji>数</Kanji>
-		<Reading>かず</Reading>
-		<Meaning>Number</Meaning>
-	</Card>
-</Cards>
+<Group>
+	<Title>Kanji for number</Title>
+	<Cards>
+		<Card>
+			<Kanji>一</Kanji>
+			<Reading>いつ</Reading>
+			<Reading>いち</Reading>
+			<Meaning>One</Meaning>
+		</Card>
+		<Card>
+			<Kanji>二</Kanji>
+			<Reading>に</Reading>
+			<Reading>ふた</Reading>
+			<Meaning>Two</Meaning>
+		</Card>
+		<Card>
+			<Kanji>三</Kanji>
+			<Reading>さん</Reading>
+			<Reading>みつ</Reading>
+			<Meaning>Three</Meaning>
+		</Card>
+		<Card>
+			<Kanji>数</Kanji>
+			<Reading>かず</Reading>
+			<Meaning>Number</Meaning>
+		</Card>
+	</Cards>
+</Group>
