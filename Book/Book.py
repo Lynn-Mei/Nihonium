@@ -1,5 +1,6 @@
 import os
 import random
+from .Pages import Pages
 
 class Book:
     def __init__(self, bookTitle: str, lines: list):
@@ -24,7 +25,7 @@ class Book:
         return self.pages
         
     @staticmethod
-    def create(bookTitle:str = None) -> Book:
+    def create(bookTitle:str = None):
         if bookTitle == None:
             bookTitle = "Book"+str(random.randint(0, 10000))+".xml"
         path = os.path.join(os.environ['APPDATA'], "Nihonium")

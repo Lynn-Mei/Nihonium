@@ -1,4 +1,4 @@
-from Kanjicard import Kanjicard
+from .Kanjicard import Kanjicard
 
 class KanjiCardGroup:
     def __init__(self, title: str):
@@ -25,5 +25,3 @@ class KanjiCardGroup:
         for card in self.cards:
             res += str(card) + "\r\n"
         return res
-            
-            

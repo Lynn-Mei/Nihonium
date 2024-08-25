@@ -6,8 +6,7 @@ from PySide6.QtGui import QAction
 from PySide6.QtCore import QFile
 from PySide6.QtUiTools import QUiLoader
 
-from CardListing import CardListing
-from CardManager import CardManager
+from Book.VisualBook import VisualBook
 
 
 class MainWindow(QMainWindow):

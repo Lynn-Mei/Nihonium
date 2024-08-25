@@ -1,4 +1,4 @@
-from Kanjicard import Kanjicard
+from .Kanjicard import Kanjicard
 from PySide6 import QtCore, QtWidgets, QtGui
 
 class VisualKanjiCard(QtWidgets.QWidget):

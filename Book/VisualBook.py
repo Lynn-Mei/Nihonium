@@ -2,11 +2,8 @@ import sys
 import random
 from PySide6 import QtCore, QtWidgets, QtGui
 
-from CardManager import CardManager
-from Kanjicard import Kanjicard
-from KanjiCardGroup import KanjiCardGroup
-
-from VisualCardGroup import VisualCardGroup
+from .VisualPages import VisualPages
+from .Book import Book
 
 class VisualBook(QtWidgets.QWidget):
     def __init__(self):

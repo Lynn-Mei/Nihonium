@@ -1,4 +1,6 @@
-''' Need to add the import of XmlLoader '''
+import os
+from .XmlLoader import XmlLoader
+from Cards.Kanji.KanjiCardGroup import KanjiCardGroup
 
 class Pages:
     def __init__(self, lines:list):
