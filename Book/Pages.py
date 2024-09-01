@@ -15,12 +15,16 @@ class Pages:
         self.VocListing = tempCollection[1]
         self.title = tempCollection[2]
         self.KanTitles = tempCollection[3]
+        self.pagespath, file_name = os.path.split(path)
         
     def getBookTitle(self):
         return self.title
         
     def getKanjiGroups(self):
         return self.KanTitles
+        
+    def getKanjiGroupsPaths(self):
+        return self.KanjiListing
         
     def openKanjiGroup(self, index: int)->KanjiCardGroup:
         group: KanjiCardGroup = None
@@ -39,8 +43,8 @@ class Pages:
         
     ''' ToDO : Definir le chemin Nihonium en constante '''
     def getPathFile(self, file:str) -> list:
-        path = os.path.join(os.environ['APPDATA'], "Nihonium")
-        path = os.path.join(path, file)
+        '''path = os.path.join(os.environ['APPDATA'], "Nihonium")'''
+        path = os.path.join(self.pagespath, file)
         return path
     
     def toXml()->str:
