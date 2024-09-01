@@ -7,10 +7,11 @@ class XmlLoader:
     def __init__(self, lines: list, path: str):
         self.kan = []
         self.voc = []
+        self.kan_titles = []
         self.path = path
         self.lines = lines
         
-    def parseMain(self):
+    '''def parseMain(self):
         for line in self.lines:
             tree = line.replace(" ", "")
             tree = tree.replace("<Page", "<")
@@ -25,9 +26,28 @@ class XmlLoader:
                 self.kan.append(tree[1])
             elif(tree[0] == "type='voc'"):
                 self.voc.append(tree[1])
-            print(tree)
-        return (self.kan, self.voc)
-
+        return (self.kan, self.voc)'''
+        
+    def parseMain(self):
+        self.kan = []
+        self.voc = []
+        self.kan_titles = []
+        tree = ET.parse(self.path)
+        root = tree.getroot()
+        for child in root:
+            element_tag = child.tag.split('}')[-1]
+            if element_tag == "Prologue":
+                title = "Test"
+            if element_tag == "Page":
+                if child.attrib['type'] == "kanji":
+                    self.kan.append(child.text)
+                    self.kan_titles.append(child.attrib['name'])
+                elif child.attrib['type'] == "voc":
+                    self.voc.append(child.text)
+        """Will certainly change to a special data class"""
+        return (self.kan, self.voc,title, self.kan_titles )
+                    
+                    
     def setLines(self, lines: list):
         self.lines = lines
     
