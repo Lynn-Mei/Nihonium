@@ -5,7 +5,8 @@ from .Pages import Pages
 class Book:
     def __init__(self, bookTitle: str, lines: list):
         self.bookTitle = bookTitle
-        self.pages = Pages(lines)
+        self.pages = Pages(lines, bookTitle)
+        self.title = self.pages.getBookTitle()
         
     def save(self):
         if self.bookTitle == None:
@@ -23,6 +24,9 @@ class Book:
         
     def getPages(self):
         return self.pages
+        
+    def getTitle(self):
+        return self.title
         
     @staticmethod
     def create(bookTitle:str = None):
