@@ -6,8 +6,15 @@ class AppdataHandler():
         self.db_path = "C:\\Users\\shuna\\Desktop\\Nihonium\\Appdata.db"
     
     def searchKanji(self, data):
+        kanjis = "("
+        kanjis += "'" + list(data)[0] + "',"
+        for k in list(data):
+            kanjis += "'" + k + "',"
+        kanjis += "'" + list(data)[0] + "')"
+        
+        query = '''SELECT * FROM Kanji k LEFT JOIN KanjiReadings r ON r.Kanji = k.Kanji WHERE k.Kanji IN '''+ kanjis +''' OR r.Reading LIKE "%'''+ data +'''%" GROUP BY k.Kanji'''
         with sqlite3.connect(self.db_path) as conn:
             cursor = conn.cursor()
-            cursor.execute('''SELECT * FROM Kanji''')
+            cursor.execute(query)
             rows = cursor.fetchall()
-        return rows    
+        return rows

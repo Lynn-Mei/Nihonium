@@ -54,9 +54,9 @@ class Kanjisearch(QtWidgets.QWidget):
             
     def search(self):
         kanji = []
-        print(self.search_bar.text)
+        print(self.search_bar.text())
         handler = AppdataHandler()
-        results = handler.searchKanji("火")
+        results = handler.searchKanji(self.search_bar.text())
         for res in results:
             kanji.append(res[0])
         print(kanji)
