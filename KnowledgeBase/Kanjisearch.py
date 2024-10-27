@@ -3,6 +3,8 @@ import random
 from PySide6 import QtCore, QtWidgets, QtGui
 from PySide6.QtWidgets import QGridLayout, QLabel, QLineEdit, QListWidget, QListWidgetItem, QHBoxLayout, QVBoxLayout, QPushButton
 
+from .AppdataHandler import AppdataHandler
+
 class Kanjisearch(QtWidgets.QWidget):
     def __init__(self):
         super().__init__()
@@ -29,16 +31,18 @@ class Kanjisearch(QtWidgets.QWidget):
         self.results_list.setIconSize(QtCore.QSize(self.rescard_size, self.rescard_size))
         
         #Temporary data fill for tests
-        self.fill_resultlist()
+        self.fill_resultlist([])
         
         #Adding widgets to main layout
         main_layout.addLayout(search_layout)
         main_layout.addWidget(self.results_list)
         self.setLayout(main_layout)
         
-    def fill_resultlist(self):
-        kanji_characters = ["日", "本", "語", "学", "生", "漢", "字", "書"]
-        for kanji in kanji_characters:
+    def fill_resultlist(self, kanji_list):
+        self.results_list.clear()
+        if len(kanji_list) < 1:
+            kanji_list = ["日", "本", "語", "学", "生", "漢", "字", "書"]
+        for kanji in kanji_list:
             item = QListWidgetItem(kanji)
             
             font = QtGui.QFont("SansSerif", 24)
@@ -49,4 +53,12 @@ class Kanjisearch(QtWidgets.QWidget):
             self.results_list.addItem(item)
             
     def search(self):
+        kanji = []
         print(self.search_bar.text)
+        handler = AppdataHandler()
+        results = handler.searchKanji("火")
+        for res in results:
+            kanji.append(res[0])
+        print(kanji)
+        self.fill_resultlist(kanji)
+        
