@@ -1,7 +1,7 @@
 import sys
 import random
 from PySide6 import QtCore, QtWidgets, QtGui
-from PySide6.QtWidgets import QApplication, QMainWindow, QMenu
+from PySide6.QtWidgets import QApplication, QMainWindow, QMenu, QFileDialog
 from PySide6.QtGui import QAction
 from PySide6.QtCore import QFile
 from PySide6.QtUiTools import QUiLoader
@@ -38,7 +38,8 @@ class MainWindow(QMainWindow):
         self.widget.newBook()
 
     def open_file(self):
-        self.widget.openBook()
+        file_name, _ = QFileDialog.getOpenFileName(self, "Open File", "", "All Files (*);;Text Files (*.txt)")
+        self.widget.openBook(file_name)
 
     def save_file(self):
         self.widget.saveBook()
