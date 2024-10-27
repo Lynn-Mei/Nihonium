@@ -1,17 +1,24 @@
 import sys
 import random
 from PySide6 import QtCore, QtWidgets, QtGui
-from PySide6.QtWidgets import QGridLayout, QLabel, QLineEdit, QListWidget, QListWidgetItem
+from PySide6.QtWidgets import QGridLayout, QLabel, QLineEdit, QListWidget, QListWidgetItem, QHBoxLayout, QVBoxLayout, QPushButton
 
 class Kanjisearch(QtWidgets.QWidget):
     def __init__(self):
         super().__init__()
         self.rescard_size = 30
-        self.layout = QtWidgets.QGridLayout(self)
+        main_layout = QVBoxLayout(self)
         
         #Adding search bar
+        search_layout = QHBoxLayout()
         self.search_bar = QLineEdit(self)
-        self.search_bar.setPlaceholderText("Search...")
+        self.search_bar.setPlaceholderText("Type your kanji or its pronounciation...")
+        
+        self.search_button = QPushButton("Search", self)
+        self.search_button.clicked.connect(self.search)
+        
+        search_layout.addWidget(self.search_bar)
+        search_layout.addWidget(self.search_button)
         
         #Adding gridlike result list
         self.results_list = QListWidget(self)
@@ -25,9 +32,9 @@ class Kanjisearch(QtWidgets.QWidget):
         self.fill_resultlist()
         
         #Adding widgets to main layout
-        self.layout.addWidget(self.search_bar)
-        self.layout.addWidget(self.results_list)
-        self.setLayout(self.layout)
+        main_layout.addLayout(search_layout)
+        main_layout.addWidget(self.results_list)
+        self.setLayout(main_layout)
         
     def fill_resultlist(self):
         kanji_characters = ["日", "本", "語", "学", "生", "漢", "字", "書"]
@@ -38,8 +45,8 @@ class Kanjisearch(QtWidgets.QWidget):
             item.setFont(font)
             
             item.setTextAlignment(QtCore.Qt.AlignCenter)
-            
             item.setSizeHint(QtCore.QSize(self.rescard_size, self.rescard_size))
-            
-            # Add item to QListWidget
             self.results_list.addItem(item)
+            
+    def search(self):
+        print(self.search_bar.text)
