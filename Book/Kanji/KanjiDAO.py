@@ -1,3 +1,4 @@
+from .KanjiList import KanjiList
 from .Kanjicard import Kanjicard
 from KnowledgeBase.AppdataHandler import AppdataHandler
 
@@ -24,3 +25,21 @@ class KanjiDAO:
             jlpt_cards.append(self.__fillCardWithData(CardData))
 
         return jlpt_cards
+
+    def getLists(self) -> list[KanjiList]:
+        lists: list[KanjiList] = []
+        data: list = self.Appdata.execute('''SELECT * FROM KanjiList''')
+        for listData in data:
+            kanjilist = KanjiList(listData[0])
+            kanjilist.setImportance(listData[1])
+            lists.append(kanjilist)
+        return lists
+
+    def fillList(self, kanji_list:KanjiList) -> KanjiList:
+        data : list = self.Appdata.execute('''SELECT k.* FROM Kanji k LEFT JOIN ListLinkToKanji l ON k.Kanji = l.Kanji
+            WHERE l.ListName = "'''+ kanji_list.getTitle() +'''"''')
+        for CardData in data:
+            kanji_list.addKanjicard(self.__fillCardWithData(CardData))
+        return kanji_list
+
+
