@@ -1,6 +1,6 @@
-from PySide6 import QtCore, QtWidgets, QtGui
-from PySide6.QtWidgets import QGridLayout, QVBoxLayout, QLabel, QListWidget, QListWidgetItem, QScrollArea
-from Cards.Kanji.VisualKanjiCardGroup import VisualKanjiCardGroup
+from PySide6 import QtWidgets
+from PySide6.QtWidgets import QLabel, QListWidget, QListWidgetItem, QScrollArea
+from Book.Kanji.VisualKanjiCardGroup import VisualKanjiCardGroup
 
 class VisualPages(QtWidgets.QWidget):
     def __init__(self, pages):

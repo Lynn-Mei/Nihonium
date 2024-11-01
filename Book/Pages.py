@@ -1,6 +1,6 @@
 import os
 from .XmlLoader import XmlLoader
-from Cards.Kanji.KanjiCardGroup import KanjiCardGroup
+from Book.Kanji.KanjiCardGroup import KanjiCardGroup
 
 class Pages:
     def __init__(self, lines:list, path: str):
@@ -47,6 +47,6 @@ class Pages:
         path = os.path.join(self.pagespath, file)
         return path
     
-    def toXml()->str:
+    def toXml(self)->str:
         return ["to", "code"]
         

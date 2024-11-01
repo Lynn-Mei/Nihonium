@@ -1,6 +1,6 @@
 import xml.etree.ElementTree as ET
-from Cards.Kanji.KanjiCardGroup import KanjiCardGroup
-from Cards.Kanji.Kanjicard import Kanjicard
+from Book.Kanji.KanjiCardGroup import KanjiCardGroup
+from Book.Kanji.Kanjicard import Kanjicard
 
 
 class XmlLoader:
