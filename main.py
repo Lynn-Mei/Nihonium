@@ -1,25 +1,30 @@
 import sys
 import random
 from PySide6 import QtCore, QtWidgets, QtGui
-from PySide6.QtWidgets import QApplication, QMainWindow, QMenu, QFileDialog
+from PySide6.QtWidgets import QApplication, QMainWindow, QMenu, QFileDialog, QTabWidget
 from PySide6.QtGui import QAction
 from PySide6.QtCore import QFile
 from PySide6.QtUiTools import QUiLoader
 
+from Book.Kanji.VisualKanjiList import VisualKanjiList
+from Book.Kanji.VisualListsPage import VisualListsPage
 from Book.VisualBook import VisualBook
 from KnowledgeBase.Kanjisearch import Kanjisearch 
 
 class MainWindow(QMainWindow):
     def __init__(self):
         super(MainWindow, self).__init__()
+        self.tab = QTabWidget()
         self.start()
         
     def start(self):
-        self.widget = VisualBook()
-        self.setCentralWidget(self.widget)
         self.resize(800, 600)
+
+        self.tab = QTabWidget()
+        self.tab.setTabPosition(QTabWidget.TabPosition.South)
+        self.setCentralWidget(self.tab)
+
         menubar = self.menuBar()
-        
         file_menu = menubar.addMenu('Study Book')
         jp_menu = menubar.addMenu('Japanese')
         
@@ -45,22 +50,44 @@ class MainWindow(QMainWindow):
         jp_menu.addAction(jpdict_action)
         
     def new_file(self):
-        self.widget.newBook()
+        book_tab = VisualBook()
+        book_tab.newBook()
+        self.tab.addTab(book_tab)
+        self.tab.setCurrentWidget(book_tab)
 
     def open_file(self):
         file_name, _ = QFileDialog.getOpenFileName(self, "Open File", "", "All Files (*);;Text Files (*.txt)")
-        self.widget.openBook(file_name)
+        book_tab = VisualBook()
+        book_tab.Button_clicked.connect(self.book_button_Clicked)
+        book_tab.openBook(file_name)
+        self.tab.addTab(book_tab, book_tab.getName())
+        self.tab.setCurrentWidget(book_tab)
 
     def save_file(self):
-        self.widget.saveBook()
+        book_tab = VisualBook()
+        book_tab.saveBook()
         
     def open_kanji_list(self):
-        self.kanji_widget = Kanjisearch()
-        self.setCentralWidget(self.kanji_widget)
+        search_tab = Kanjisearch()
+        self.tab.addTab(search_tab, "Kanji Dictionary")
+        self.tab.setCurrentWidget(search_tab)
         
     def open_jp_dictionary(self):
         print("dict")
-    
+
+    def book_button_Clicked(self, id_btn: int):
+        match id_btn:
+            case 1:
+                self.open_list_view()
+            case _:
+                print("none")
+
+    def open_list_view(self):
+        list_view: QtWidgets.QWidget = VisualListsPage()
+        self.tab.addTab(list_view, "Your lists")
+        self.tab.setCurrentWidget(list_view)
+
+
 if __name__ == "__main__":
     app = QApplication([])
     widget = MainWindow()
