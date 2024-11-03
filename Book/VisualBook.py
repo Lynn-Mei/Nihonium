@@ -1,17 +1,20 @@
 import sys
 import random
 from PySide6 import QtCore, QtWidgets, QtGui
-from PySide6.QtWidgets import QGridLayout, QLabel
-
-from .VisualPages import VisualPages
+from PySide6.QtWidgets import QGridLayout, QLabel, QBoxLayout
+from .Summary import Summary
 from .Book import Book
 
 class VisualBook(QtWidgets.QWidget):
+
+    Button_clicked = QtCore.Signal(int)
+
     def __init__(self):
         super().__init__()
         self.book = None
-        self.layout = QtWidgets.QGridLayout(self)
-        self.setStyleSheet("background-color: #c99c99;")
+        self.layout = QtWidgets.QBoxLayout(QBoxLayout.Direction.TopToBottom)
+        self.setLayout(self.layout)
+        self.summary: Summary = Summary()
 
     def newBook(self):
         self.book = Book.create("cards.xml")
@@ -20,13 +23,20 @@ class VisualBook(QtWidgets.QWidget):
     def openBook(self, filePath: str):
         self.book = Book.importBook(filePath)
         self.showBook()
-        print(1)
         
     def saveBook(self):
         self.book.save()
         
     def showBook(self):
-        self.layout.addWidget(VisualPages(self.book.getPages()), 0, 0)
+        self.layout.addWidget(self.summary)
+        self.summary.Button_clicked.connect(self.handleButtonClicked)
+        #self.layout.addWidget(VisualPages(self.book.getPages()), 0, 0)
+
+    def handleButtonClicked(self, id_btn: int):
+        self.Button_clicked.emit(id_btn)
+
+    def getName(self)->str:
+        return "book" #self.book.bookTitle
 
 '''    @QtCore.Slot()
     def magic(self):
