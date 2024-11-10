@@ -78,13 +78,18 @@ class MainWindow(QMainWindow):
     def book_button_Clicked(self, id_btn: int):
         match id_btn:
             case 1:
-                self.open_list_view()
+                self.open_list_view(False)
+            case 2:
+                self.open_list_view(True)
             case _:
                 print("none")
 
-    def open_list_view(self):
-        list_view: QtWidgets.QWidget = VisualListsPage()
-        self.tab.addTab(list_view, "Your lists")
+    def open_list_view(self, type: bool):
+        list_view: QtWidgets.QWidget = VisualListsPage(type)
+        if not type:
+            self.tab.addTab(list_view, "Your lists")
+        else:
+            self.tab.addTab(list_view, "Kanji by JLPT Level")
         self.tab.setCurrentWidget(list_view)
 
 
