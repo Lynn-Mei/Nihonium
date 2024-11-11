@@ -21,12 +21,9 @@ class VisualListsPage(QtWidgets.QWidget):
     def acquire_lists(self, IsJLPT: bool) -> list[KanjiList]:
         dao: KanjiDAO = KanjiDAO()
         res: list[KanjiList] = []
-        print(IsJLPT)
         if not IsJLPT:
-            print("da")
             res = dao.getLists()
         else:
-            print("o")
             res = [KanjiList("JLPT N1"), KanjiList("JLPT N2"), KanjiList("JLPT N3"), KanjiList("JLPT N4"),
                    KanjiList("JLPT N5")]
         return res

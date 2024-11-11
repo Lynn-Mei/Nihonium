@@ -29,7 +29,10 @@ class Kanjisearch(QtWidgets.QWidget):
         self.results_list.setResizeMode(QListWidget.Adjust)
         self.results_list.setUniformItemSizes(True)        
         self.results_list.setIconSize(QtCore.QSize(self.rescard_size, self.rescard_size))
-        
+
+        self.setQSSRules()
+        self.results_list.itemClicked.connect(self.detectMemberClick)
+
         #Temporary data fill for tests
         self.fill_resultlist([])
         
@@ -61,4 +64,22 @@ class Kanjisearch(QtWidgets.QWidget):
             kanji.append(res[0])
         print(kanji)
         self.fill_resultlist(kanji)
-        
+
+    def setQSSRules(self):
+        self.results_list.setStyleSheet("""
+            QListWidget::item {
+                background-color: #f0f0f0;  /* Default background color */
+                padding: 10px;              /* Adds padding to make it more visually appealing */
+                border-radius: 5px;         /* Rounded corners */
+            }
+            QListWidget::item:hover {
+                background-color: #a0c0f0;  /* Background color on hover */
+                color: white;               /* Text color on hover */
+                font-weight: bold;          /* Bold text on hover */
+                border: 1px solid #6a9fb5;  /* Optional: border to accentuate the hover */
+            }
+        """)
+
+    def detectMemberClick(self, item: QListWidgetItem):
+        kanji: str = item.text()
+        print(kanji)
