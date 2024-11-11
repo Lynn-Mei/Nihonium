@@ -2,14 +2,16 @@ from .Kanjicard import Kanjicard
 from PySide6 import QtCore, QtWidgets, QtGui
 
 class VisualKanjiCard(QtWidgets.QWidget):
+
     def __init__(self, card: Kanjicard):
         super().__init__()
         self.card = card
-        
+
         self.setFixedSize(200, 75)
         self.kanji = QtWidgets.QLabel(card.kanji)
-        self.kana = QtWidgets.QLabel(card.readings[0])
-        self.meaning = QtWidgets.QLabel(card.meanings[0])
+
+        self.kana = QtWidgets.QLabel("こう")#card.readings[0])
+        self.meaning = QtWidgets.QLabel("travel")
         
         self.kanji.setStyleSheet("font-size: 21px;")
         self.kana.setStyleSheet("font-size: 21px;")

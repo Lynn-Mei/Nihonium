@@ -35,6 +35,14 @@ class KanjiDAO:
             lists.append(kanjilist)
         return lists
 
+    def getKanjicard(self, kanji: str) -> Kanjicard:
+        lists: list[Kanjicard] = []
+        data: list = self.Appdata.execute('''SELECT * FROM Kanji WHERE Kanji = "''' + kanji + '''"''')
+        for listData in data:
+            kanjicard: Kanjicard = self.__fillCardWithData(listData)
+            lists.append(kanjicard)
+        return lists[0]
+
     def fillList(self, kanji_list:KanjiList) -> KanjiList:
         data : list = self.Appdata.execute('''SELECT k.* FROM Kanji k LEFT JOIN ListLinkToKanji l ON k.Kanji = l.Kanji
             WHERE l.ListName = "'''+ kanji_list.getTitle() +'''"''')

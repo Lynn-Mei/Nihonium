@@ -3,9 +3,13 @@ import random
 from PySide6 import QtCore, QtWidgets, QtGui
 from PySide6.QtWidgets import QGridLayout, QLabel, QLineEdit, QListWidget, QListWidgetItem, QHBoxLayout, QVBoxLayout, QPushButton
 
+from Book.Kanji.KanjiDAO import KanjiDAO
+from Book.Kanji.Kanjicard import Kanjicard
 from .AppdataHandler import AppdataHandler
 
 class Kanjisearch(QtWidgets.QWidget):
+    Result_clicked = QtCore.Signal(Kanjicard)
+
     def __init__(self):
         super().__init__()
         self.rescard_size = 30
@@ -82,4 +86,6 @@ class Kanjisearch(QtWidgets.QWidget):
 
     def detectMemberClick(self, item: QListWidgetItem):
         kanji: str = item.text()
-        print(kanji)
+        dao: KanjiDAO = KanjiDAO()
+        card = dao.getKanjicard(kanji)
+        self.Result_clicked.emit(card)

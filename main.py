@@ -6,6 +6,8 @@ from PySide6.QtGui import QAction
 from PySide6.QtCore import QFile
 from PySide6.QtUiTools import QUiLoader
 
+from Book.Kanji.Kanjicard import Kanjicard
+from Book.Kanji.VisualKanjiCard import VisualKanjiCard
 from Book.Kanji.VisualKanjiList import VisualKanjiList
 from Book.Kanji.VisualListsPage import VisualListsPage
 from Book.VisualBook import VisualBook
@@ -69,6 +71,7 @@ class MainWindow(QMainWindow):
         
     def open_kanji_list(self):
         search_tab = Kanjisearch()
+        search_tab.Result_clicked.connect(self.open_kanjicard)
         self.tab.addTab(search_tab, "Kanji Dictionary")
         self.tab.setCurrentWidget(search_tab)
         
@@ -91,6 +94,11 @@ class MainWindow(QMainWindow):
         else:
             self.tab.addTab(list_view, "Kanji by JLPT Level")
         self.tab.setCurrentWidget(list_view)
+
+    def open_kanjicard(self, card: Kanjicard):
+        card_view: QtWidgets.QWidget = VisualKanjiCard(card)
+        self.tab.addTab(card_view, card.kanji + " - " + card.meanings[0])
+
 
 
 if __name__ == "__main__":
