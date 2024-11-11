@@ -1,13 +1,18 @@
 <Book>
-	<Prologue name='Test-book'>11-08-2024</Prologue>
-	<Page type='kanji' name='Numbers'>kan-0000001.xml</Page>
-	<Page type='kanji' name='Animals'>kan-0000002.xml</Page>
-	<Page type='kanji' name='Law'>kan-0000003.xml</Page>
-	<Page type='kanji' name='Elements'>kan-0000004.xml</Page>
-	<Page type='kanji' name='Elements Part 2'>kan-0000005.xml</Page>
-	<Page type='voc'>voc-0000001.xml</Page>
-	<Page type='voc'>voc-0000002.xml</Page>
-	<Page type='voc'>voc-0000003.xml</Page>
-	<Page type='voc'>voc-0000004.xml</Page>
-	<Page type='voc'>voc-0000005.xml</Page>
+	<Prologue name='Test book'>11-08-2024</Prologue>
+	<LearnedLog type='kanji'>
+		<Learn date='11-08-2024'>差残</Learn>
+		<Learn date='12-08-2024'>根航</Learn>
+		<Learn date='13-08-2024'>個</Learn>
+	</LearnedLog>
+	<ProgressLog type="lists">
+		<Progress level="80">test</Progress>
+		<Progress level="60">test3</Progress>
+	</ProgressLog>
+	<ProgressLog type="kanji">
+		<Progress level="60">差残</Progress>
+		<Progress level="40">航</Progress>
+		<Progress level="20">根個</Progress>
+	</ProgressLog>
+	<ToLearn type="kanji">忘窓娘</ToLearn>
 </Book>
