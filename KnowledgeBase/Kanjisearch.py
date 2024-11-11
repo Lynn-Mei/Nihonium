@@ -48,7 +48,7 @@ class Kanjisearch(QtWidgets.QWidget):
     def fill_resultlist(self, kanji_list):
         self.results_list.clear()
         if len(kanji_list) < 1:
-            kanji_list = ["日", "本", "語", "学", "生", "漢", "字", "書"]
+            kanji_list = ["航", "本", "語", "学", "生", "漢", "字", "書"]
         for kanji in kanji_list:
             item = QListWidgetItem(kanji)
             

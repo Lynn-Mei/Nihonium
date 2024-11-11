@@ -1,3 +1,6 @@
+from PySide6.QtWidgets import QHBoxLayout, QVBoxLayout, QWidget, QLabel, QScrollArea
+
+from .CardHeadList import CardHeadList
 from .Kanjicard import Kanjicard
 from PySide6 import QtCore, QtWidgets, QtGui
 
@@ -6,21 +9,22 @@ class VisualKanjiCard(QtWidgets.QWidget):
     def __init__(self, card: Kanjicard):
         super().__init__()
         self.card = card
+        main_layout: QVBoxLayout = QVBoxLayout(self)
 
-        self.setFixedSize(200, 75)
-        self.kanji = QtWidgets.QLabel(card.kanji)
+        container_widget = QWidget()
+        container_layout = QVBoxLayout(container_widget)
 
-        self.kana = QtWidgets.QLabel("こう")#card.readings[0])
-        self.meaning = QtWidgets.QLabel("travel")
-        
-        self.kanji.setStyleSheet("font-size: 21px;")
-        self.kana.setStyleSheet("font-size: 21px;")
-        self.meaning.setStyleSheet("font-size: 21px;")
-        
-        self.layout = QtWidgets.QHBoxLayout(self)
-        self.layout.addWidget(self.kanji)
-        self.layout.addWidget(self.kana)
-        self.layout.addWidget(self.meaning)
-        
-        self.setStyleSheet("background-color: lightblue;")
+        container_layout.addWidget(CardHeadList("Meanings", self.card.meanings, "#3949AB", True))
+        header_div: QHBoxLayout = QHBoxLayout()
+        kanji_card: QLabel = QLabel(self.card.kanji)
+        header_div.addWidget(kanji_card)
+
+
+        scroll_area = QScrollArea()
+        scroll_area.setWidget(container_widget)
+        scroll_area.setWidgetResizable(True)
+        main_layout.addWidget(scroll_area)
+        self.setLayout(main_layout)
+
+
         
