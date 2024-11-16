@@ -25,4 +25,6 @@ class CardHeadList(QtWidgets.QWidget):
             tag.setMaximumSize(label_size)
             main_layout.addWidget(tag)
 
+        
+
         self.setLayout(main_layout)
