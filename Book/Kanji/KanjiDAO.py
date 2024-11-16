@@ -1,5 +1,5 @@
-from .KanjiList import KanjiList
-from .Kanjicard import Kanjicard
+from Book.Kanji.Kanjicard import Kanjicard
+from Book.Kanji.KanjiList import KanjiList
 from KnowledgeBase.AppdataHandler import AppdataHandler
 
 
@@ -50,4 +50,10 @@ class KanjiDAO:
             kanji_list.addKanjicard(self.__fillCardWithData(CardData))
         return kanji_list
 
+    def getFirstSeen(self, kanji:str) :
+        data : list = self.Appdata.execute('''SELECT MIN(Date) FROM Progress WHERE Kanji = "''' + kanji + '''"''')
+        return data[0]
 
+    def getLastSeen(self, kanji:str) :
+        data : list = self.Appdata.execute('''SELECT MAX(Date) FROM Progress WHERE Kanji = "''' + kanji + '''"''')
+        return data[0]

@@ -3,7 +3,6 @@ from PySide6.QtWidgets import QVBoxLayout, QListWidget
 
 from Book.Kanji.KanjiDAO import KanjiDAO
 from Book.Kanji.KanjiList import KanjiList
-from Book.Kanji.Kanjicard import Kanjicard
 
 
 class VisualListsPage(QtWidgets.QWidget):

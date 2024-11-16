@@ -2,7 +2,6 @@ from PySide6 import QtWidgets, QtCore, QtGui
 from PySide6.QtWidgets import QVBoxLayout, QListWidget, QListWidgetItem
 
 from Book.Kanji.KanjiList import KanjiList
-from Book.Kanji.Kanjicard import Kanjicard
 
 class VisualKanjiList(QtWidgets.QWidget):
     def __init__(self, cards: KanjiList):

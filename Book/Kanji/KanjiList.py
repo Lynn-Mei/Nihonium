@@ -1,4 +1,5 @@
-from .Kanjicard import Kanjicard
+from Book.Kanji.Kanjicard import Kanjicard
+
 
 class KanjiList:
     def __init__(self, title: str):
