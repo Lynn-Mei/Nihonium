@@ -8,7 +8,6 @@ from PySide6.QtUiTools import QUiLoader
 
 from Book.Kanji.Kanjicard import Kanjicard
 from Book.Kanji.VisualKanjiCard import VisualKanjiCard
-from Book.Kanji.VisualKanjiList import VisualKanjiList
 from Book.Kanji.VisualListsPage import VisualListsPage
 from Book.VisualBook import VisualBook
 from KnowledgeBase.Kanjisearch import Kanjisearch 
@@ -98,7 +97,7 @@ class MainWindow(QMainWindow):
     def open_kanjicard(self, card: Kanjicard):
         card_view: QtWidgets.QWidget = VisualKanjiCard(card)
         self.tab.addTab(card_view, card.kanji + " - " + card.meanings[0])
-
+        self.tab.setCurrentWidget(card_view)
 
 
 if __name__ == "__main__":
