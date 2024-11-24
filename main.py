@@ -23,6 +23,9 @@ class MainWindow(QMainWindow):
 
         self.tab = QTabWidget()
         self.tab.setTabPosition(QTabWidget.TabPosition.South)
+        self.tab.setTabsClosable(True)
+        self.tab.tabCloseRequested.connect(self.close_tab)
+        self.tab.setMovable(True)
         self.setCentralWidget(self.tab)
 
         menubar = self.menuBar()
@@ -67,7 +70,10 @@ class MainWindow(QMainWindow):
     def save_file(self):
         book_tab = VisualBook()
         book_tab.saveBook()
-        
+
+    def close_tab(self, index:int):
+        self.tab.removeTab(index)
+
     def open_kanji_list(self):
         search_tab = Kanjisearch()
         search_tab.Result_clicked.connect(self.open_kanjicard)
