@@ -25,7 +25,9 @@ class VisualListsPage(QtWidgets.QWidget):
         dao: KanjiDAO = KanjiDAO()
         res: list[KanjiList] = []
         if not IsJLPT:
-            res = dao.getLists()
+            temp_res:list[KanjiList]= dao.getLists()
+            for kan_list in temp_res:
+                res.append(dao.fillList(kan_list))
         else:
             res: list[KanjiList] = []
             for i in range(1, 5):
