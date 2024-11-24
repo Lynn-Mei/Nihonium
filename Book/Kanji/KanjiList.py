@@ -10,6 +10,9 @@ class KanjiList:
     def setImportance(self, importance):
         self.importance = importance
 
+    def setCards(self, cards: list[Kanjicard]):
+        self.cards = cards
+
     def addKanjicard(self, card: Kanjicard):
         self.cards.append(card)
 

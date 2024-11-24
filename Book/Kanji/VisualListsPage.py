@@ -27,8 +27,11 @@ class VisualListsPage(QtWidgets.QWidget):
         if not IsJLPT:
             res = dao.getLists()
         else:
-            res = [KanjiList("JLPT N1"), KanjiList("JLPT N2"), KanjiList("JLPT N3"), KanjiList("JLPT N4"),
-                   KanjiList("JLPT N5")]
+            res: list[KanjiList] = []
+            for i in range(1, 5):
+                jlpt_list:KanjiList = KanjiList("JLPT N" + str(i))
+                jlpt_list.setCards(dao.getJLPTKanjicards(i))
+                res.append(jlpt_list)
         return res
 
 class VisualPageListElement(QtWidgets.QWidget):
