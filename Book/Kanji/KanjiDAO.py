@@ -57,3 +57,10 @@ class KanjiDAO:
     def getLastSeen(self, kanji:str) :
         data : list = self.Appdata.execute('''SELECT MAX(Date) FROM Progress WHERE Kanji = "''' + kanji + '''"''')
         return data[0]
+
+    def get_all_kanji(self, limit:int) -> list[str]:
+        all_kanji: list[str] = []
+        data: list = self.Appdata.execute('''SELECT Kanji FROM Kanji LIMIT ''' + str(limit))
+        for kan in data:
+            all_kanji.append(kan[0])
+        return all_kanji

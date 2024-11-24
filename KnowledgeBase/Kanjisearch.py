@@ -4,6 +4,7 @@ from PySide6 import QtCore, QtWidgets, QtGui
 from PySide6.QtWidgets import QGridLayout, QLabel, QLineEdit, QListWidget, QListWidgetItem, QHBoxLayout, QVBoxLayout, QPushButton
 
 from Book.Kanji.KanjiDAO import KanjiDAO
+from Book.Kanji.KanjiList import KanjiList
 from Book.Kanji.Kanjicard import Kanjicard
 from .AppdataHandler import AppdataHandler
 
@@ -38,7 +39,8 @@ class Kanjisearch(QtWidgets.QWidget):
         self.results_list.itemClicked.connect(self.detectMemberClick)
 
         #Temporary data fill for tests
-        self.fill_resultlist([])
+        dao:KanjiDAO = KanjiDAO()
+        self.fill_resultlist(dao.get_all_kanji(60))
         
         #Adding widgets to main layout
         main_layout.addLayout(search_layout)
@@ -58,7 +60,7 @@ class Kanjisearch(QtWidgets.QWidget):
             item.setTextAlignment(QtCore.Qt.AlignCenter)
             item.setSizeHint(QtCore.QSize(self.rescard_size, self.rescard_size))
             self.results_list.addItem(item)
-            
+
     def search(self):
         kanji = []
         print(self.search_bar.text())
