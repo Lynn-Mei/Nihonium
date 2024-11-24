@@ -74,15 +74,15 @@ class Kanjisearch(QtWidgets.QWidget):
     def setQSSRules(self):
         self.results_list.setStyleSheet("""
             QListWidget::item {
-                background-color: #f0f0f0;  /* Default background color */
-                padding: 10px;              /* Adds padding to make it more visually appealing */
-                border-radius: 5px;         /* Rounded corners */
+                background-color: #f0f0f0; 
+                padding: 10px;        
+                border-radius: 5px; 
             }
             QListWidget::item:hover {
-                background-color: #a0c0f0;  /* Background color on hover */
-                color: white;               /* Text color on hover */
-                font-weight: bold;          /* Bold text on hover */
-                border: 1px solid #6a9fb5;  /* Optional: border to accentuate the hover */
+                background-color: #a0c0f0;  
+                color: white; 
+                font-weight: bold;
+                border: 1px solid #6a9fb5;
             }
         """)
 

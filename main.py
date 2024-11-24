@@ -104,6 +104,7 @@ class MainWindow(QMainWindow):
 
     def open_inner_list_view(self, kan_list: KanjiList):
         inner_list_view: VisualKanjiList = VisualKanjiList(kan_list)
+        inner_list_view.Result_clicked.connect(self.open_kanjicard)
         self.tab.addTab(inner_list_view, kan_list.title)
         self.tab.setCurrentWidget(inner_list_view)
 
