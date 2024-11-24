@@ -12,7 +12,9 @@ from Book.Kanji.VisualKanjiCard import VisualKanjiCard
 from Book.Kanji.VisualKanjiList import VisualKanjiList
 from Book.Kanji.VisualListsPage import VisualListsPage
 from Book.VisualBook import VisualBook
-from KnowledgeBase.Kanjisearch import Kanjisearch 
+from KnowledgeBase.Kanjisearch import Kanjisearch
+from Settings.SettingsDAO import SettingsDAO
+
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -33,6 +35,7 @@ class MainWindow(QMainWindow):
         menubar = self.menuBar()
         file_menu = menubar.addMenu('Study Book')
         jp_menu = menubar.addMenu('Japanese')
+        settings_menu = menubar.addMenu('Settings')
 
         mainmenu_action = QAction('Main Menu', self)
         mainmenu_action.triggered.connect(self.show_main_book)
@@ -48,6 +51,9 @@ class MainWindow(QMainWindow):
         
         jpdict_action = QAction('Dictionnary', self)
         jpdict_action.triggered.connect(self.open_jp_dictionary)
+
+        theme_action = QAction('Theme and Colors', self)
+        theme_action.triggered.connect(self.open_theme_settings)
 
         file_menu.addAction(mainmenu_action)
         file_menu.addAction(new_action)
@@ -83,6 +89,9 @@ class MainWindow(QMainWindow):
         
     def open_jp_dictionary(self):
         print("dict")
+
+    def open_theme_settings(self):
+
 
     def book_button_Clicked(self, id_btn: int):
         match id_btn:
