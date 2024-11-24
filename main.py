@@ -6,8 +6,10 @@ from PySide6.QtGui import QAction
 from PySide6.QtCore import QFile
 from PySide6.QtUiTools import QUiLoader
 
+from Book.Kanji.KanjiList import KanjiList
 from Book.Kanji.Kanjicard import Kanjicard
 from Book.Kanji.VisualKanjiCard import VisualKanjiCard
+from Book.Kanji.VisualKanjiList import VisualKanjiList
 from Book.Kanji.VisualListsPage import VisualListsPage
 from Book.VisualBook import VisualBook
 from KnowledgeBase.Kanjisearch import Kanjisearch 
@@ -92,12 +94,18 @@ class MainWindow(QMainWindow):
                 print("none")
 
     def open_list_view(self, type: bool):
-        list_view: QtWidgets.QWidget = VisualListsPage(type)
+        list_view: VisualListsPage = VisualListsPage(type)
+        list_view.KanjiListSelected.connect(self.open_inner_list_view)
         if not type:
             self.tab.addTab(list_view, "Your lists")
         else:
             self.tab.addTab(list_view, "Kanji by JLPT Level")
         self.tab.setCurrentWidget(list_view)
+
+    def open_inner_list_view(self, kan_list: KanjiList):
+        inner_list_view: VisualKanjiList = VisualKanjiList(kan_list)
+        self.tab.addTab(inner_list_view, kan_list.title)
+        self.tab.setCurrentWidget(inner_list_view)
 
     def open_kanjicard(self, card: Kanjicard):
         card_view: QtWidgets.QWidget = VisualKanjiCard(card)
