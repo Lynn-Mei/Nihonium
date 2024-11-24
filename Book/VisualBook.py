@@ -20,23 +20,18 @@ class VisualBook(QtWidgets.QWidget):
         self.book = Book.create("cards.xml")
         self.showBook()
         
-    def openBook(self, filePath: str):
-        self.book = Book.importBook(filePath)
-        self.showBook()
-        
     def saveBook(self):
         self.book.save()
         
     def showBook(self):
         self.layout.addWidget(self.summary)
         self.summary.Button_clicked.connect(self.handleButtonClicked)
-        #self.layout.addWidget(VisualPages(self.book.getPages()), 0, 0)
 
     def handleButtonClicked(self, id_btn: int):
         self.Button_clicked.emit(id_btn)
 
     def getName(self)->str:
-        return "book" #self.book.bookTitle
+        return "Study Book" #self.book.bookTitle
 
 '''    @QtCore.Slot()
     def magic(self):

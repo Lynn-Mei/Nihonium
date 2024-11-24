@@ -31,12 +31,12 @@ class MainWindow(QMainWindow):
         menubar = self.menuBar()
         file_menu = menubar.addMenu('Study Book')
         jp_menu = menubar.addMenu('Japanese')
-        
+
+        mainmenu_action = QAction('Main Menu', self)
+        mainmenu_action.triggered.connect(self.show_main_book)
+
         new_action = QAction('New', self)
         new_action.triggered.connect(self.new_file)
-
-        open_action = QAction('Open', self)
-        open_action.triggered.connect(self.open_file)
     
         save_action = QAction('Save', self)
         save_action.triggered.connect(self.save_file)
@@ -46,25 +46,24 @@ class MainWindow(QMainWindow):
         
         jpdict_action = QAction('Dictionnary', self)
         jpdict_action.triggered.connect(self.open_jp_dictionary)
-        
+
+        file_menu.addAction(mainmenu_action)
         file_menu.addAction(new_action)
-        file_menu.addAction(open_action)
         file_menu.addAction(save_action)
         jp_menu.addAction(kanji_action)
         jp_menu.addAction(jpdict_action)
-        
+
+    def show_main_book(self):
+        book_tab = VisualBook()
+        book_tab.Button_clicked.connect(self.book_button_Clicked)
+        book_tab.showBook()
+        self.tab.addTab(book_tab, book_tab.getName())
+        self.tab.setCurrentWidget(book_tab)
+
     def new_file(self):
         book_tab = VisualBook()
         book_tab.newBook()
         self.tab.addTab(book_tab)
-        self.tab.setCurrentWidget(book_tab)
-
-    def open_file(self):
-        file_name, _ = QFileDialog.getOpenFileName(self, "Open File", "", "All Files (*);;Text Files (*.txt)")
-        book_tab = VisualBook()
-        book_tab.Button_clicked.connect(self.book_button_Clicked)
-        book_tab.openBook(file_name)
-        self.tab.addTab(book_tab, book_tab.getName())
         self.tab.setCurrentWidget(book_tab)
 
     def save_file(self):
