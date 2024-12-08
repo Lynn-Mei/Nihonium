@@ -3,6 +3,7 @@ from PySide6.QtWidgets import QVBoxLayout
 
 from Book.Kanji.Kanjicard import Kanjicard
 from Book.Kanji.KanjicardVisuals.CardHeadList import CardHeadList
+from Settings.ColorSettings import ColorSettings
 
 
 class CardHeadStack(QtWidgets.QWidget):
@@ -11,9 +12,10 @@ class CardHeadStack(QtWidgets.QWidget):
         self.card: Kanjicard = card
         main_layout: QVBoxLayout = QVBoxLayout(self)
 
-        main_layout.addWidget(CardHeadList("Meanings", self.card.meanings, "#D32F2F", True))
-        main_layout.addWidget(CardHeadList("Onoyomi", self.card.getYomi(False), "#00695C", True))
-        main_layout.addWidget(CardHeadList("Kunyomi", self.card.getYomi(True), "#008CD4", True))
+        colorSettings = ColorSettings()
+        main_layout.addWidget(CardHeadList("Meanings", self.card.meanings, colorSettings.tags[0], True))
+        main_layout.addWidget(CardHeadList("Onoyomi", self.card.getYomi(False), colorSettings.tags[1], True))
+        main_layout.addWidget(CardHeadList("Kunyomi", self.card.getYomi(True), colorSettings.tags[2], True))
 
         self.setLayout(main_layout)
 

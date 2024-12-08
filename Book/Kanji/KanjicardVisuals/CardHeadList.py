@@ -19,7 +19,7 @@ class CardHeadList(QtWidgets.QWidget):
             text_color = "white"
         for data in dataset:
             tag: QLabel = QLabel(data)
-            tag.setStyleSheet("QLabel { background-color: '" + color +
+            tag.setStyleSheet("QLabel { background-color: '#" + color +
                               "'; color: '"+ text_color +"'; border-radius: 25px; padding: 5px; }")
             tag.setAlignment(QtCore.Qt.AlignCenter)
             tag.setMaximumSize(label_size)

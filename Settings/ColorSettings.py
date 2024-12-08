@@ -2,19 +2,25 @@ from .SettingsDAO import SettingsDAO
 
 
 class ColorSettings():
-    def __init__(self):
-        self.dao = SettingsDAO()
-        values: dict[str, str] = self.dao.select_colors()
-        print(values)
-        self.main_color:str = values["Main"]
-        self.secondary_color:str = values["Second"]
-        self.tertiary_color: str = values["Third"]
-        self.hover_color: str = values["Hover"]
-        self.positive_color: str = values["Positive"]
-        self.neutral_color: str = values["Neutral"]
-        self.negative_color: str = values["Negative"]
+    _instance = None
 
-        self.tags: list[str] = self.dao.select_tags()
+    def __new__(cls, *args, **kwargs):
+        if cls._instance is None:
+            cls._instance = super(ColorSettings, cls).__new__(cls)
+        return cls._instance
+
+    def __init__(self):
+        if not hasattr(self, 'dao'):
+            self.dao = SettingsDAO()
+            values: dict[str, str] = self.dao.select_colors()
+            self.main_color:str = values["Main"]
+            self.secondary_color:str = values["Second"]
+            self.tertiary_color: str = values["Third"]
+            self.hover_color: str = values["Hover"]
+            self.positive_color: str = values["Positive"]
+            self.neutral_color: str = values["Neutral"]
+            self.negative_color: str = values["Negative"]
+            self.tags: list[str] = self.dao.select_tags()
 
     def setAllColors(self, main_colors:(str,str,str), valued_colors:(str,str,str), tags:list[str]):
         self.main_color = main_colors[0]
