@@ -1,6 +1,8 @@
 from PySide6 import QtWidgets, QtCore
 from PySide6.QtWidgets import QPushButton
 
+from Settings.ColorSettings import ColorSettings
+
 
 class Summary(QtWidgets.QWidget):
 
@@ -38,3 +40,5 @@ class Summary(QtWidgets.QWidget):
         self.learn_btn.clicked.connect(lambda: self.Button_clicked.emit(5))
         self.practice_btn.clicked.connect(lambda: self.Button_clicked.emit(6))
 
+        colorSettings = ColorSettings()
+        self.setStyleSheet("background-color: #" + colorSettings.getThirdColor() + ";")

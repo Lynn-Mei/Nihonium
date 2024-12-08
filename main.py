@@ -34,6 +34,7 @@ class MainWindow(QMainWindow):
         self.tab.setMovable(True)
         self.setCentralWidget(self.tab)
 
+
         menubar = self.menuBar()
         file_menu = menubar.addMenu('Study Book')
         jp_menu = menubar.addMenu('Japanese')
@@ -63,6 +64,27 @@ class MainWindow(QMainWindow):
         jp_menu.addAction(kanji_action)
         jp_menu.addAction(jpdict_action)
         settings_menu.addAction(theme_action)
+
+        #theme
+        menubar.setStyleSheet("background-color: #" + self.colorSettings.getSecondColor() + "; color: white;")
+        self.setStyleSheet("background-color: #" + self.colorSettings.getMainColor() + ";")
+        self.tab.setStyleSheet("""
+                    QTabBar::tab {
+                        background-color: '#""" + self.colorSettings.getSecondColor() + """';
+                        color: white;
+                    }
+
+                    QTabBar::tab:selected {
+                        background-color: '#""" + self.colorSettings.getThirdColor() + """';
+                        color: black;
+                    }
+
+                    QTabBar::tab:hover { /* Hover effect */
+                        background: '#""" + self.colorSettings.getThirdColor() + """';
+                        color: black;
+                    }
+
+                """)
 
     def show_main_book(self):
         book_tab = VisualBook()
