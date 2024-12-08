@@ -10,9 +10,18 @@ class SettingsDAO():
             self.Appdata.execute('''UPDATE Settings SET value = "''' + tags[tag] + '''" WHERE setting = "Tag''' +
                                  str(tag+1) + '''"''')
 
+    def select_colors(self)-> dict[str,str]:
+        data:list = self.Appdata.execute('''SELECT * FROM Settings WHERE setting LIKE "Color-%"''')
+        tags: dict[str,str] = {}
+        label:str = ""
+        for tag in data:
+            label = tag[0]
+            tags[label.replace("Color-", "")] = tag[1]
+        return tags
+
     def select_tags(self) -> list[str]:
-        data:list = self.Appdata.execute('''SELECT * FROM Setting WHERE setting LIKE "%Tag%"''')
+        data:list = self.Appdata.execute('''SELECT * FROM Settings WHERE setting LIKE "%Tag%"''')
         tags: list[str] = []
         for tag in data:
-            tags.append(tag[0])
+            tags.append(tag[1])
         return tags

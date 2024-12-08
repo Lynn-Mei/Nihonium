@@ -13,6 +13,7 @@ from Book.Kanji.VisualKanjiList import VisualKanjiList
 from Book.Kanji.VisualListsPage import VisualListsPage
 from Book.VisualBook import VisualBook
 from KnowledgeBase.Kanjisearch import Kanjisearch
+from Settings.ColorSettings import ColorSettings
 from Settings.SettingsDAO import SettingsDAO
 
 
@@ -20,6 +21,7 @@ class MainWindow(QMainWindow):
     def __init__(self):
         super(MainWindow, self).__init__()
         self.tab = QTabWidget()
+        self.colorSettings = ColorSettings()
         self.start()
         
     def start(self):
@@ -60,6 +62,7 @@ class MainWindow(QMainWindow):
         file_menu.addAction(save_action)
         jp_menu.addAction(kanji_action)
         jp_menu.addAction(jpdict_action)
+        settings_menu.addAction(theme_action)
 
     def show_main_book(self):
         book_tab = VisualBook()
@@ -91,7 +94,7 @@ class MainWindow(QMainWindow):
         print("dict")
 
     def open_theme_settings(self):
-
+        print(self.colorSettings.main_color)
 
     def book_button_Clicked(self, id_btn: int):
         match id_btn:

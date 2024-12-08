@@ -1,19 +1,20 @@
 from .SettingsDAO import SettingsDAO
 
-class NiumColors(metaclass=ColorSett):
-    pass
 
 class ColorSettings():
     def __init__(self):
-        self.main_color:str = ""
-        self.secondary_color:str = ""
-        self.tertiary_color: str = ""
-        self.hover_color: str = ""
-        self.positive_color: str = ""
-        self.neutral_color: str = ""
-        self.negative_color: str = ""
+        self.dao = SettingsDAO()
+        values: dict[str, str] = self.dao.select_colors()
+        print(values)
+        self.main_color:str = values["Main"]
+        self.secondary_color:str = values["Second"]
+        self.tertiary_color: str = values["Third"]
+        self.hover_color: str = values["Hover"]
+        self.positive_color: str = values["Positive"]
+        self.neutral_color: str = values["Neutral"]
+        self.negative_color: str = values["Negative"]
 
-        self.tags: list[str] = SettingsDAO.select_tags()
+        self.tags: list[str] = self.dao.select_tags()
 
     def setAllColors(self, main_colors:(str,str,str), valued_colors:(str,str,str), tags:list[str]):
         self.main_color = main_colors[0]
