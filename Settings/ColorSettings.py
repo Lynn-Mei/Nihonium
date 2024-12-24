@@ -22,10 +22,11 @@ class ColorSettings():
             self.negative_color: str = values["Negative"]
             self.tags: list[str] = self.dao.select_tags()
 
-    def setAllColors(self, main_colors:(str,str,str), valued_colors:(str,str,str), tags:list[str]):
+    def setAllColors(self, main_colors:(str,str,str,str), valued_colors:(str,str,str), tags:list[str]):
         self.main_color = main_colors[0]
         self.secondary_color = main_colors[1]
         self.tertiary_color = main_colors[2]
+        self.hover_color = main_colors[3]
 
         self.positive_color = valued_colors[0]
         self.neutral_color = valued_colors[1]
@@ -63,3 +64,6 @@ class ColorSettings():
 
     def setThirdColor(self) -> str:
         return self.tertiary_color
+
+    def getHoverColor(self) -> str:
+        return self.hover_color
