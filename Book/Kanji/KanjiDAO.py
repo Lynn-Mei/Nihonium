@@ -26,6 +26,17 @@ class KanjiDAO:
 
         return jlpt_cards
 
+    def getJLPTSubset(self, jlpt_number: int) -> dict[str,list[Kanjicard]]:
+        subsets: dict[str, list[Kanjicard]] = {}
+        data : list = self.Appdata.execute('''SELECT * FROM Kanji WHERE Id LIKE "''' + str(jlpt_number) + '''-%"''')
+        for CardData in data:
+            card: Kanjicard = self.__fillCardWithData(CardData)
+            subset_number: str = str(card.identifer).split("-")[1]
+            if subset_number not in subsets.keys() :
+                subsets[subset_number] = []
+            subsets[subset_number].append(card)
+        return subsets
+
     def getLists(self) -> list[KanjiList]:
         lists: list[KanjiList] = []
         data: list = self.Appdata.execute('''SELECT * FROM KanjiList''')
