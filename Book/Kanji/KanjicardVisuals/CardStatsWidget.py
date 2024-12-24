@@ -14,9 +14,10 @@ class CardStatsWidget(QtWidgets.QWidget):
         first_seen:str = dao.getFirstSeen(self.card.kanji)
         last_seen:str =dao.getFirstSeen(self.card.kanji)
 
-        main_layout.addWidget(CardStatsWidgetElement("JLPT", str(card.JLPT)))
-        main_layout.addWidget(CardStatsWidgetElement("Strokes", str(card.strokes)))
-        main_layout.addWidget(CardStatsWidgetElement("Frequency", str(card.frequency)))
+        main_layout.addWidget(CardStatsWidgetElement("Identifier", str(card.getIdentifer())))
+        main_layout.addWidget(CardStatsWidgetElement("JLPT", str(card.getJLPT())))
+        main_layout.addWidget(CardStatsWidgetElement("Strokes", str(card.getStrokes())))
+        main_layout.addWidget(CardStatsWidgetElement("Frequency", str(card.getFrequency())))
         main_layout.addWidget(CardStatsWidgetElement("First Seen", str(first_seen[0])))
         main_layout.addWidget(CardStatsWidgetElement("Last Seen", str(last_seen[0])))
         main_layout.addWidget(CardStatsWidgetElement("Mastery", "0"))

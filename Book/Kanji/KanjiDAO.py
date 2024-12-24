@@ -9,7 +9,7 @@ class KanjiDAO:
 
     def __fillCardWithData(self, data_set:list) -> Kanjicard:
         card: Kanjicard = Kanjicard(data_set[0])
-        card.setInfoData(data_set[1], data_set[2], data_set[3])
+        card.setInfoData(data_set[1], data_set[2], data_set[3], data_set[5])
         card.setMeanings(data_set[4])
 
         reading_data: list = self.Appdata.execute(
