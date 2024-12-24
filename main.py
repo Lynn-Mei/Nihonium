@@ -23,6 +23,7 @@ class MainWindow(QMainWindow):
         self.tab = QTabWidget()
         self.colorSettings = ColorSettings()
         self.start()
+        self.show_main_book()
         
     def start(self):
         self.resize(800, 600)

@@ -4,14 +4,14 @@ class Kanjicard:
         self.JLPT = 0
         self.frequency = 0
         self.strokes = 1
-        self.id = 888
+        self.identifer = "8-8-8"
         self.readings = {}
         self.meanings = []
         
     def __str__(self):
         return self.kanji + " " + str(self.meanings) + " " + str(self.readings)
         
-    def setInfoData(self, jlpt: int, frequency: int, strokes: int, identifer: int):
+    def setInfoData(self, jlpt: int, frequency: int, strokes: int, identifer: str):
         self.JLPT = jlpt
         self.frequency = frequency
         self.strokes = strokes
@@ -32,7 +32,7 @@ class Kanjicard:
         for meaning in meaningsString.split(","):
             self.meanings.append(meaning)
 
-    def getIdentifer(self)->int:
+    def getIdentifer(self)->str:
         return self.identifer
 
     def getCharacter(self)->str:
