@@ -6,11 +6,13 @@ from PySide6.QtGui import QAction
 from PySide6.QtCore import QFile
 from PySide6.QtUiTools import QUiLoader
 
+from Book.Kanji.KanjiDAO import KanjiDAO
 from Book.Kanji.KanjiList import KanjiList
 from Book.Kanji.Kanjicard import Kanjicard
 from Book.Kanji.VisualKanjiCard import VisualKanjiCard
 from Book.Kanji.VisualKanjiList import VisualKanjiList
 from Book.Kanji.VisualListsPage import VisualListsPage
+from Book.Printer.PrintedCard import PrintedCards
 from Book.VisualBook import VisualBook
 from KnowledgeBase.Kanjisearch import Kanjisearch
 from Settings.ColorSettings import ColorSettings
@@ -56,6 +58,9 @@ class MainWindow(QMainWindow):
         jpdict_action = QAction('Dictionnary', self)
         jpdict_action.triggered.connect(self.open_jp_dictionary)
 
+        print_action = QAction('Print', self)
+        print_action.triggered.connect(self.print)
+
         theme_action = QAction('Theme and Colors', self)
         theme_action.triggered.connect(self.open_theme_settings)
 
@@ -64,6 +69,7 @@ class MainWindow(QMainWindow):
         file_menu.addAction(save_action)
         jp_menu.addAction(kanji_action)
         jp_menu.addAction(jpdict_action)
+        jp_menu.addAction(print_action)
         settings_menu.addAction(theme_action)
 
         #theme
@@ -148,6 +154,16 @@ class MainWindow(QMainWindow):
         self.tab.addTab(card_view, card.kanji + " - " + card.meanings[0])
         self.tab.setCurrentWidget(card_view)
 
+    def print(self):
+        dao: KanjiDAO = KanjiDAO()
+        cards:list[Kanjicard] = []
+
+        cards.append(dao.getKanjicard("忘"))
+        cards.append(dao.getKanjicard("忘"))
+        cards.append(dao.getKanjicard("忘"))
+
+        pcard: PrintedCards = PrintedCards(cards)
+        pcard.print_document()
 
 if __name__ == "__main__":
     app = QApplication([])
