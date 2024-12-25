@@ -161,6 +161,11 @@ class MainWindow(QMainWindow):
         cards.append(dao.getKanjicard("忘"))
         cards.append(dao.getKanjicard("忘"))
         cards.append(dao.getKanjicard("忘"))
+        cards.append(dao.getKanjicard("忘"))
+        cards.append(dao.getKanjicard("忘"))
+        cards.append(dao.getKanjicard("忘"))
+        cards.append(dao.getKanjicard("忘"))
+        cards.append(dao.getKanjicard("忘"))
 
         pcard: PrintedCards = PrintedCards(cards)
         pcard.print_document()
