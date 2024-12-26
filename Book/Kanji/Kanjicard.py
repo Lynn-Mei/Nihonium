@@ -32,6 +32,9 @@ class Kanjicard:
         for meaning in meaningsString.split(","):
             self.meanings.append(meaning)
 
+    def getMeanings(self) -> list[str]:
+        return self.meanings
+
     def getIdentifer(self)->str:
         return self.identifer
 

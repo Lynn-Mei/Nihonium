@@ -13,7 +13,7 @@ class PrintedCardHead(QtWidgets.QWidget):
 
         kan: QLabel = QLabel(self.card.getCharacter())
         font: QFont = QFont()
-        font.setPointSize(26)
+        font.setPointSize(45)
         kan.setFont(font)
 
         self.main_layout.addWidget(kan)
