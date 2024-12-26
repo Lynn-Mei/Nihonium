@@ -1,5 +1,5 @@
 from PySide6 import QtWidgets
-from PySide6.QtGui import QPainter
+from PySide6.QtGui import QPainter, QFont
 from PySide6.QtCore import QPoint
 from PySide6.QtPrintSupport import QPrinter, QPrintDialog
 from PySide6.QtWidgets import QVBoxLayout, QWidget, QHBoxLayout, QLabel, QGridLayout, QSpacerItem, QSizePolicy
@@ -56,15 +56,47 @@ class PrintedCard(QtWidgets.QWidget):
         self.container_widget = QWidget()
         container_layout = QVBoxLayout(self.container_widget)
 
-        container_layout.addWidget(CardHead(self.card))
-        container_layout.addWidget(CardStatsWidget(self.card))
-        header_div: QHBoxLayout = QHBoxLayout()
-        kanji_card: QLabel = QLabel(self.card.kanji)
-        header_div.addWidget(kanji_card)
+        container_layout.addWidget(PrintedCardHead(self.card))
+        container_layout.addWidget(PrintedCardSounds(self.card))
 
         self.main_layout.addWidget(self.container_widget)
         self.setLayout(self.main_layout)
 
-        
+class PrintedCardHead(QtWidgets.QWidget):
+    def __init__(self, card: Kanjicard):
+        super().__init__()
+        self.card = card
+        self.main_layout: QVBoxLayout = QVBoxLayout(self)
 
+        kan: QLabel = QLabel(self.card.getCharacter())
+        font: QFont = QFont()
+        font.setPointSize(26)
+        kan.setFont(font)
+
+        self.main_layout.addWidget(kan)
+        self.setLayout(self.main_layout)
+
+class PrintedCardSounds(QtWidgets.QWidget):
+    def __init__(self, card: Kanjicard):
+        super().__init__()
+        self.main_layout: QVBoxLayout = QVBoxLayout(self)
+        self.card: Kanjicard = card
+
+        self.main_layout.addWidget(PrintedCardSoundsPart("Kunyomi", self.card.getYomi(True)))
+        self.main_layout.addWidget(PrintedCardSoundsPart("Onyomi", self.card.getYomi(False)))
+
+        self.setLayout(self.main_layout)
+
+class PrintedCardSoundsPart(QtWidgets.QWidget):
+    def __init__(self, label:str, readings: list[str]):
+        super().__init__()
+        self.main_layout: QVBoxLayout = QVBoxLayout(self)
+        self.readings: list[str] = readings
+
+        label: QLabel = QLabel(label)
+        self.main_layout.addWidget(label)
+        for reading in readings:
+            tag: QLabel = QLabel(reading)
+            self.main_layout.addWidget(tag)
+        self.setLayout(self.main_layout)
 

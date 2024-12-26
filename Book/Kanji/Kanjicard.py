@@ -20,8 +20,8 @@ class Kanjicard:
     def addReading(self, reading: str, onyomi: bool):
         self.readings[reading] = onyomi
 
-    def getYomi(self, yomi: bool) -> [str]:
-        kun: [str] = []
+    def getYomi(self, yomi: bool) -> list[str]:
+        kun: list[str] = []
         for i in range(0, len(list(self.readings.values()))):
             if list(self.readings.values())[i] == yomi:
                 kun.append(list(self.readings.keys())[i])
