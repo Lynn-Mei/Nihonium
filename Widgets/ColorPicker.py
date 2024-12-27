@@ -1,6 +1,9 @@
+from PySide6 import QtCore
 from PySide6.QtWidgets import QApplication, QColorDialog, QPushButton, QVBoxLayout, QWidget
 
 class ColorPicker(QWidget):
+    Validate_clicked = QtCore.Signal(str)
+
     def __init__(self):
         super().__init__()
 
@@ -16,8 +19,7 @@ class ColorPicker(QWidget):
         color = QColorDialog.getColor()
 
         if color.isValid():
-            self.setStyleSheet(f"background-color: {color.name()};")
-            print(f"Selected Color: {color.name()}")
+            self.Validate_clicked.emit(color.getRgb())
 
-    def set_color(self, color:str):
+    def setColor(self, color:str):
         self.setStyleSheet(f"background-color: #"+ color +";")
