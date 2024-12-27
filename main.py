@@ -17,6 +17,7 @@ from Book.VisualBook import VisualBook
 from KnowledgeBase.Kanjisearch import Kanjisearch
 from Settings.ColorSettings import ColorSettings
 from Settings.SettingsDAO import SettingsDAO
+from Settings.ThemeView import ThemeView
 
 
 class MainWindow(QMainWindow):
@@ -123,7 +124,9 @@ class MainWindow(QMainWindow):
         print("dict")
 
     def open_theme_settings(self):
-        print(self.colorSettings.main_color)
+        theme_tab = ThemeView()
+        self.tab.addTab(theme_tab, "Theme Settings")
+        self.tab.setCurrentWidget(theme_tab)
 
     def book_button_Clicked(self, id_btn: int):
         match id_btn:
