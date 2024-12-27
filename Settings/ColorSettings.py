@@ -1,3 +1,5 @@
+from re import match
+
 from .SettingsDAO import SettingsDAO
 
 
@@ -67,3 +69,39 @@ class ColorSettings():
 
     def getHoverColor(self) -> str:
         return self.hover_color
+
+    def setColorFromTag(self, color_tag: str, value: str):
+        match(color_tag):
+            case "Main":
+                self.main_color = value
+            case "Second":
+                self.secondary_color = value
+            case "Third":
+                self.tertiary_color = value
+            case "Hover":
+                self.hover_color = value
+            case "Positive":
+                self.positive_color = value
+            case "Neutral":
+                self.neutral_color = value
+            case "Negative":
+                self.negative_color = value
+
+    def setTagColor(self, ident:int, value: str):
+        self.tags[ident] = value
+
+    def push_data(self):
+        dao: SettingsDAO = SettingsDAO()
+        color_data: dict[str, str] = {
+            "Main": self.main_color,
+            "Second": self.secondary_color,
+            "Third": self.tertiary_color,
+            "Hover": self.hover_color,
+            "Positive": self.positive_color,
+            "Negative": self.negative_color,
+            "Neutral": self.neutral_color
+        }
+        for i in range(0, len(self.tags)):
+            color_data["Tag" + str(i)] = self.tags[i]
+
+        dao.push_colors(color_data)

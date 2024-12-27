@@ -4,9 +4,9 @@ from PySide6.QtWidgets import QApplication, QColorDialog, QPushButton, QVBoxLayo
 class ColorPicker(QWidget):
     Validate_clicked = QtCore.Signal(str)
 
-    def __init__(self):
+    def __init__(self, identifier: str):
         super().__init__()
-
+        self.identifier = identifier
         self.layout = QVBoxLayout(self)
 
         self.button = QPushButton("Pick a Color")
