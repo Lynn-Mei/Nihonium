@@ -25,3 +25,10 @@ class SettingsDAO():
         for tag in data:
             tags.append(tag[1])
         return tags
+
+    def push_colors(self, color_data: dict[str, str]):
+        for color in color_data.keys():
+            request: str = ('''UPDATE settings SET value = "'''+ color_data[color] +'''" WHERE setting = "''' +
+                            color + '''"''')
+            self.Appdata.execute(request)
+        print("a")

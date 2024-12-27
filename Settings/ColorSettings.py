@@ -102,6 +102,5 @@ class ColorSettings():
             "Neutral": self.neutral_color
         }
         for i in range(0, len(self.tags)):
-            color_data["Tag" + str(i)] = self.tags[i]
-
+            color_data["Tag" + str(i+1)] = self.tags[i]
         dao.push_colors(color_data)
