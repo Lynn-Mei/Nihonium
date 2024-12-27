@@ -31,19 +31,12 @@ class PrintedCards(QtWidgets.QWidget):
 
     def print_document(self):
         printer = QPrinter()
-
-        # Show print dialog
         print_dialog = QPrintDialog(printer, self)
         if print_dialog.exec_() == QPrintDialog.Accepted:
-            # Use QPainter to print the widget
             painter = QPainter(printer)
-
-            # Render the widget onto the painter
             self.container_widget.render(
                 painter, QPoint(0, 0)
-            )  # Specify the position explicitly
-
-            # End painting
+            )
             painter.end()
 
 class PrintedCard(QtWidgets.QWidget):
@@ -60,7 +53,17 @@ class PrintedCard(QtWidgets.QWidget):
         container_layout.addWidget(PrintedCardHead(self.card))
         container_layout.addWidget(PrintedCardSounds(self.card))
 
-        self.main_layout.addWidget(self.container_widget)
+        graphicsview:QtWidgets.QGraphicsView = QtWidgets.QGraphicsView()
+        scene:QtWidgets.QGraphicsScene = QtWidgets.QGraphicsScene(graphicsview)
+        graphicsview.setScene(scene)
+
+        proxy:QtWidgets.QGraphicsProxyWidget = QtWidgets.QGraphicsProxyWidget()
+        proxy.setWidget(self.container_widget)
+        proxy.setTransformOriginPoint(proxy.boundingRect().center())
+        proxy.setRotation(90)
+        scene.addItem(proxy)
+
+        self.main_layout.addWidget(graphicsview)
         self.setLayout(self.main_layout)
 
 
