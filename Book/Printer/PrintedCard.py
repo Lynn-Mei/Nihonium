@@ -42,7 +42,7 @@ class PrintedCards(QtWidgets.QWidget):
 class PrintedCard(QtWidgets.QWidget):
     def __init__(self, card: Kanjicard):
         super().__init__()
-        self.setStyleSheet("background-color: #F7F7FF;")
+        self.setStyleSheet("background-color: #F7F7FF; border-radius: 25px;")
         self.setFixedSize(430, 285)
         self.card = card
         self.main_layout: QVBoxLayout = QVBoxLayout(self)
