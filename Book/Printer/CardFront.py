@@ -8,6 +8,7 @@ from Book.Kanji.Kanjicard import Kanjicard
 class PrintedCardHead(QtWidgets.QWidget):
     def __init__(self, card: Kanjicard):
         super().__init__()
+        self.setStyleSheet("background-color: transparent;")
         self.setFixedSize(200, 285)
         self.card = card
         self.main_layout: QVBoxLayout = QVBoxLayout(self)

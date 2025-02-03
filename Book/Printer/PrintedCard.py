@@ -18,12 +18,11 @@ class PrintedCards(QtWidgets.QWidget):
         super().__init__()
         self.cards = cards
         self.main_layout: QGridLayout = QGridLayout(self)
-        self.setStyleSheet("background-color: white;")
 
         self.container_widget = QWidget()
         self.container_layout = QGridLayout(self.container_widget)
 
-        self.container_layout.setContentsMargins(50, 50, 50, 50)
+
         for i, card in enumerate(self.cards):
             row, col = divmod(i, 2)
             self.container_layout.addWidget(PrintedCard(card), row, col)
@@ -44,8 +43,7 @@ class PrintedCards(QtWidgets.QWidget):
 class PrintedCard(QtWidgets.QWidget):
     def __init__(self, card: Kanjicard):
         super().__init__()
-        self.setStyleSheet("border-radius: 25px;")
-        self.setFixedSize(430, 285)
+        self.setFixedSize(453, 322)
         self.card = card
 
         path:str = os.path.join(os.path.dirname(__file__), "NihoniumCard1-1.png")
@@ -53,11 +51,14 @@ class PrintedCard(QtWidgets.QWidget):
 
         self.main_layout: QVBoxLayout = QVBoxLayout(self)
         self.container_widget = QWidget()
+        self.container_widget.setStyleSheet("background-color: transparent;")
         container_layout = QVBoxLayout(self.container_widget)
-        container_layout.addWidget(PrintedCardHead(self.card))
-        container_layout.addWidget(PrintedCardSounds(self.card))
+        self.setStyleSheet("background-color: transparent;")
+        """container_layout.addWidget(PrintedCardHead(self.card))
+        container_layout.addWidget(PrintedCardSounds(self.card))"""
 
         graphicsview:QtWidgets.QGraphicsView = QtWidgets.QGraphicsView()
+        graphicsview.setStyleSheet("background: transparent; border: none;")
         scene:QtWidgets.QGraphicsScene = QtWidgets.QGraphicsScene(graphicsview)
         graphicsview.setScene(scene)
 
