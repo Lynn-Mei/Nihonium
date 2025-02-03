@@ -1,5 +1,7 @@
+import os
+
 from PySide6 import QtWidgets
-from PySide6.QtGui import QPainter, QFont
+from PySide6.QtGui import QPainter, QFont, QPixmap, QPageSize
 from PySide6.QtCore import QPoint
 from PySide6.QtPrintSupport import QPrinter, QPrintDialog
 from PySide6.QtWidgets import QVBoxLayout, QWidget, QHBoxLayout, QLabel, QGridLayout, QSpacerItem, QSizePolicy
@@ -42,14 +44,16 @@ class PrintedCards(QtWidgets.QWidget):
 class PrintedCard(QtWidgets.QWidget):
     def __init__(self, card: Kanjicard):
         super().__init__()
-        self.setStyleSheet("background-color: #F7F7FF; border-radius: 25px;")
+        self.setStyleSheet("border-radius: 25px;")
         self.setFixedSize(430, 285)
         self.card = card
-        self.main_layout: QVBoxLayout = QVBoxLayout(self)
 
+        path:str = os.path.join(os.path.dirname(__file__), "NihoniumCard1-1.png")
+        self.background_image = QPixmap(path)
+
+        self.main_layout: QVBoxLayout = QVBoxLayout(self)
         self.container_widget = QWidget()
         container_layout = QVBoxLayout(self.container_widget)
-
         container_layout.addWidget(PrintedCardHead(self.card))
         container_layout.addWidget(PrintedCardSounds(self.card))
 
@@ -66,4 +70,7 @@ class PrintedCard(QtWidgets.QWidget):
         self.main_layout.addWidget(graphicsview)
         self.setLayout(self.main_layout)
 
-
+    def paintEvent(self, event):
+        painter = QPainter(self)
+        painter.drawPixmap(self.rect(), self.background_image.scaled(self.size()))
+        super().paintEvent(event)
