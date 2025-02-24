@@ -1,6 +1,6 @@
 import os
 
-from PySide6 import QtWidgets
+from PySide6 import QtWidgets, QtCore
 from PySide6.QtGui import QPainter, QFont, QPixmap, QPageSize
 from PySide6.QtCore import QPoint
 from PySide6.QtPrintSupport import QPrinter, QPrintDialog
@@ -52,10 +52,23 @@ class PrintedCard(QtWidgets.QWidget):
         self.main_layout: QVBoxLayout = QVBoxLayout(self)
         self.container_widget = QWidget()
         self.container_widget.setStyleSheet("background-color: transparent;")
-        container_layout = QVBoxLayout(self.container_widget)
+        self.container_widget.setAttribute(QtCore.Qt.WA_NoSystemBackground, True)  # Disable system background
+        self.container_widget.setAttribute(QtCore.Qt.WA_TranslucentBackground, True)
+        self.container_layout = QVBoxLayout(self.container_widget)
+
         self.setStyleSheet("background-color: transparent;")
-        """container_layout.addWidget(PrintedCardHead(self.card))
-        container_layout.addWidget(PrintedCardSounds(self.card))"""
+
+        self.label = QLabel("光")
+        self.label.setStyleSheet("font-size: 120px; color: black;")
+        self.label.setAlignment(QtCore.Qt.AlignCenter)
+        self.label.setFixedSize(280, 120)
+        self.container_layout.addWidget(self.label)
+
+        self.label1 = QLabel("火")
+        self.label1.setStyleSheet("font-size: 50px; color: black;")
+        self.label1.setAlignment(QtCore.Qt.AlignCenter)
+        self.label1.setFixedSize(300, 222)
+        self.container_layout.addWidget(self.label1)
 
         graphicsview:QtWidgets.QGraphicsView = QtWidgets.QGraphicsView()
         graphicsview.setStyleSheet("background: transparent; border: none;")
